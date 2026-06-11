@@ -14,7 +14,7 @@ if (!process.env.GROQ_API_KEY) {
 }
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 app.post("/api/chat", async (req, res) => {
   try {

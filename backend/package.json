@@ -1,5 +1,5 @@
 {
-  "name": "ai-sql-generator",
+  "name": "ai-sql-generator-backend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
