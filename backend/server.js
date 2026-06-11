@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const path = require("path");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -9,12 +9,32 @@ const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 
 if (!process.env.GROQ_API_KEY) {
-  console.error("Missing GROQ_API_KEY in .env file");
+  console.error("Missing GROQ_API_KEY in environment variables");
   process.exit(1);
 }
 
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",").map(url => url.trim())
+  : ["http://localhost:3000", "http://127.0.0.1:3000"];
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+    callback(new Error("Not allowed by CORS"));
+  }
+}));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend")));
+
+app.get("/", (_req, res) => {
+  res.json({ status: "ok", message: "AI SQL Generator API" });
+});
+
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
 
 app.post("/api/chat", async (req, res) => {
   try {
@@ -47,5 +67,5 @@ app.post("/api/chat", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`API server running on port ${PORT}`);
 });
