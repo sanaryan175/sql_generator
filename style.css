@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0d1117;
+  color: #e6edf3;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  padding: 32px 20px;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+.header {
+  text-align: center;
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: rgba(255,255,255,0.4);
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+
+/* ================================
+   MAIN LAYOUT
+   Left panel and right panel
+   side by side
+================================ */
+.main-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.left-panel {
+  flex: 1;                    /* takes up equal space */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ================================
+   INPUT GROUPS
+================================ */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e6edf3;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hint {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+}
+
+textarea {
+  width: 100%;
+  padding: 14px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  color: #e6edf3;
+  font-size: 13px;
+  font-family: 'Fira Code', monospace;  /* code font for schema */
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #f59e0b;
+}
+
+textarea::placeholder {
+  color: rgba(255,255,255,0.25);
+}
+
+
+/* ================================
+   EXAMPLE CHIPS
+================================ */
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.examples-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+
+.example-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 14px;
+  background: #1c2128;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #f59e0b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  background: #f59e0b;
+  color: #0d1117;
+  border-color: #f59e0b;
+}
+
+
+/* ================================
+   GENERATE BUTTON
+================================ */
+#generate-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  letter-spacing: 0.5px;
+}
+
+#generate-btn:hover {
+  opacity: 0.85;
+}
+
+#generate-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#loading {
+  text-align: center;
+  color: #f59e0b;
+  font-size: 14px;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+#error {
+  color: #f87171;
+  font-size: 13px;
+  text-align: center;
+}
+
+
+/* ================================
+   OUTPUT AREA
+================================ */
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.output-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.output-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  background: transparent;
+  color: #e6edf3;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover:not(:disabled) {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.icon-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+
+/* ================================
+   SQL CODE BOX
+   This is where the SQL appears
+================================ */
+.sql-box {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 200px;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;        /* preserves SQL formatting */
+  overflow-x: auto;
+}
+
+.placeholder-text {
+  color: rgba(255,255,255,0.2);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+/* SQL Syntax Highlighting colors */
+.sql-keyword  { color: #ff7b72; font-weight: 600; }  /* SELECT, FROM etc */
+.sql-function { color: #d2a8ff; }                     /* COUNT(), MAX() etc */
+.sql-string   { color: #a5d6ff; }                     /* 'values' */
+.sql-number   { color: #f2cc60; }                     /* numbers */
+.sql-comment  { color: #8b949e; font-style: italic; } /* -- comments */
+.sql-operator { color: #ff7b72; }                     /* =, >, < */
+
+
+/* ================================
+   EXPLANATION
+================================ */
+#explanation-section {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-left: 3px solid #f59e0b;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+#explanation-section h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+#explanation-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+
+/* ================================
+   HISTORY
+================================ */
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.history-section h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-header h3 {
+  margin: 0;
+}
+
+#history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#history-list li {
+  padding: 10px 14px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#history-list li:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.empty-history {
+  color: rgba(255,255,255,0.2) !important;
+  cursor: default !important;
+  font-style: italic;
+}
+
+
+/* Responsive — stack on mobile */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+}
+
+.hidden {
+  display: none;
+}

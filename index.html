@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI SQL Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>🗄️ AI SQL Generator</h1>
+      <p class="subtitle">Describe what you want — get SQL instantly</p>
+    </div>
+
+
+    <!-- Main layout: left = inputs, right = output -->
+    <div class="main-layout">
+
+
+      <!-- ===== LEFT PANEL ===== -->
+      <div class="left-panel">
+
+        <!-- Step 1: Schema input -->
+        <div class="input-group">
+          <label>
+            Step 1 — Describe your database schema
+            <span class="hint">Tell the AI what tables and columns you have</span>
+          </label>
+          <textarea
+            id="schema-input"
+            rows="6"
+            placeholder="Example:
+users(id, name, email, created_at, plan)
+orders(id, user_id, product_id, amount, created_at)
+products(id, name, price, category, stock)"
+          ></textarea>
+        </div>
+
+
+        <!-- Step 2: Question input -->
+        <div class="input-group">
+          <label>
+            Step 2 — Ask your question in plain English
+            <span class="hint">What data do you want to get?</span>
+          </label>
+          <textarea
+            id="question-input"
+            rows="3"
+            placeholder="Example: Show me all users who signed up last month and have placed more than 3 orders"
+          ></textarea>
+        </div>
+
+
+        <!-- Example questions -->
+        <div class="examples">
+          <p class="examples-label">Try an example:</p>
+          <div class="example-chips">
+            <span class="chip" data-q="Show all users on the pro plan">
+              Pro users
+            </span>
+            <span class="chip" data-q="Find top 5 products by total sales amount">
+              Top products
+            </span>
+            <span class="chip" data-q="Count orders placed in the last 7 days">
+              Recent orders
+            </span>
+            <span class="chip" data-q="Find users who have never placed an order">
+              Inactive users
+            </span>
+          </div>
+        </div>
+
+
+        <!-- Generate button -->
+        <button id="generate-btn">
+          ⚡ Generate SQL
+        </button>
+
+
+        <!-- Loading -->
+        <p id="loading" class="hidden">Thinking... 🤔</p>
+
+
+        <!-- Error -->
+        <p id="error" class="hidden"></p>
+
+      </div>
+
+
+      <!-- ===== RIGHT PANEL ===== -->
+      <div class="right-panel">
+
+        <!-- Output area -->
+        <div class="output-header">
+          <h2>Generated SQL</h2>
+          <div class="output-actions">
+            <button id="copy-btn" class="icon-btn" disabled>
+              📋 Copy
+            </button>
+            <button id="clear-btn" class="icon-btn" disabled>
+              🗑 Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- SQL code block -->
+        <div id="sql-output" class="sql-box">
+          <p class="placeholder-text">
+            Your SQL will appear here...
+          </p>
+        </div>
+
+
+        <!-- Explanation of the query -->
+        <div id="explanation-section" class="hidden">
+          <h3>What this query does</h3>
+          <p id="explanation-text"></p>
+        </div>
+
+
+        <!-- Query History -->
+        <div class="history-section">
+          <div class="history-header">
+            <h3>Query History</h3>
+            <button id="clear-history-btn" class="icon-btn" disabled>
+              Clear history
+            </button>
+          </div>
+          <ul id="history-list">
+            <li class="empty-history">No queries yet</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
