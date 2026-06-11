@@ -83,6 +83,14 @@ async function groqChat(messages, maxTokens, temperature) {
     })
   });
 
+  const contentType = response.headers.get("content-type") || "";
+
+  if (!contentType.includes("application/json")) {
+    throw new Error(
+      "Backend returned an invalid response. Check that Render is running and config.js has the correct URL."
+    );
+  }
+
   const data = await response.json();
 
   if (data.error) {

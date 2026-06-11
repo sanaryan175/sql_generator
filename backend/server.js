@@ -15,14 +15,24 @@ if (!process.env.GROQ_API_KEY) {
 
 const allowedOrigins = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(",").map(url => url.trim())
-  : ["http://localhost:3000", "http://127.0.0.1:3000"];
+  : [];
 
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin) {
       callback(null, true);
       return;
     }
+
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
+      origin.endsWith(".vercel.app");
+
+    if (isAllowed) {
+      callback(null, true);
+      return;
+    }
+
     callback(new Error("Not allowed by CORS"));
   }
 }));
