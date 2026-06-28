@@ -114,9 +114,3 @@ Just open `index.html` in your browser. No build step, no server required.
 ## Disclaimer
 
 This is a learning/demo project. AI-generated SQL should always be **reviewed before running on a production database** — especially for `UPDATE`, `DELETE`, or `DROP` statements.
-
----
-
-## License
-
-MIT License — feel free to use, modify, and share.
